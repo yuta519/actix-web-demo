@@ -1,5 +1,7 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 
+mod lib;
+
 #[get("/")]
 async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
@@ -16,6 +18,9 @@ async fn manual_hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    lib::front_of_house::print_hoge();
+    lib::front_of_house::hosting::add_to_waitlist();
+
     HttpServer::new(|| {
         App::new()
             .service(hello)
